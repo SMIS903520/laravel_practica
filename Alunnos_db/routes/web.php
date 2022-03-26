@@ -18,4 +18,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get ('/Alumnos/index',[AlumnoController::class,'index']);
+
+
+
 Route::resource('Alumnos',AlumnoController::class);
