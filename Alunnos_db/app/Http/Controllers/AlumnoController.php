@@ -6,6 +6,12 @@ use Illuminate\Http\Request;
 
 class AlumnoController extends Controller
 {
+     /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +20,7 @@ class AlumnoController extends Controller
     public function index()
     {
         //
-        $data['alumnos']=Alumno::paginate(5);
+        $data['alumnos']=Alumno::paginate(20);
         return view('Alumnos.index', $data);
 
     }
@@ -39,9 +45,11 @@ class AlumnoController extends Controller
     public function store(Request $request)
     {
         //
-        $AlData = request()->except('_token');
-        Alumno::insert($AlData);
-        return response()->json($AlData);
+        $AlumnosData = request()->except('_token');
+        Alumno::insert($AlumnosData);
+        return redirect('Alumnos/index');
+        return response()->json($AlumnosData);
+        
     }
 
     /**
@@ -78,9 +86,9 @@ class AlumnoController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $AlData=request()->except(['_token','_method']);
-        Alumno::where('id','=',$id)->update($AlData);
-        return redirect('Alumnos');
+        $AlumnosData=request()->except(['_token','_method']);
+        Alumno::where('id','=',$id)->update($AlumnosData);
+        return redirect('Alumnos/index');
     }
 
     /**
